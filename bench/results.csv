@@ -1,0 +1,14 @@
+test,engine,runs,median_ms,p95_ms,ops_per_sec
+1 read page,mongo,2000,0.414,0.569,2375.6
+1 read page,pg 3 queries,2000,1.086,1.462,900.1
+1 read page,pg json_agg,2000,1.085,1.6,897.0
+2 search tag+video,mongo,300,0.612,1.655,1302.8
+2 search tag+video,pg,300,0.486,1.005,1798.5
+3 aggregate dept,mongo,20,501.397,547.169,2.0
+3 aggregate dept,pg,20,118.627,148.185,8.0
+4 insert page,mongo,500,4.31,5.167,227.5
+4 insert page,pg,500,5.663,6.87,175.0
+5 add comment,mongo,2000,4.024,4.954,241.6
+5 add comment,pg,2000,1.9,2.404,522.7
+6 update nested,mongo,1000,3.832,4.725,298.2
+6 update nested,pg,1000,1.75,2.406,601.1

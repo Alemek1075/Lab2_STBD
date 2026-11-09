@@ -1,0 +1,36 @@
+services:
+  pg:
+    image: postgres:18
+    environment:
+      POSTGRES_PASSWORD: lab2
+      POSTGRES_DB: lms
+    ports: ["5434:5432"]
+    cpus: 2
+    mem_limit: 2g
+    volumes:
+      - ./sql:/sql
+  mongo:
+    image: mongo:8
+    ports: ["27018:27017"]
+    cpus: 2
+    mem_limit: 2g
+    volumes:
+      - ./mongo:/mongo
+  neo4j:
+    image: neo4j:5
+    environment:
+      NEO4J_AUTH: neo4j/lab2pass123
+    ports: ["7475:7474", "7688:7687"]
+    volumes:
+      - ./neo4j:/cypher
+  bench:
+    image: python:3.12-slim
+    profiles: ["bench"]
+    working_dir: /lab
+    environment:
+      LAB2_PG: host=pg port=5432 dbname=lms user=postgres password=lab2
+      LAB2_MONGO: mongodb://mongo:27017
+    cpus: 2
+    volumes:
+      - .:/lab
+    entrypoint: ["sh", "-c", "pip install -q --root-user-action=ignore pymongo 'psycopg[binary]' && python \"$$@\"", "--"]

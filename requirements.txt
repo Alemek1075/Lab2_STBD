@@ -1,0 +1,5 @@
+pymongo
+psycopg[binary]
+neo4j
+matplotlib
+pillow
